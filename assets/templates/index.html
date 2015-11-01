@@ -1,3 +1,9 @@
 <div>
-{{alive}}
+  <h1>Memes</h1>{{memes}}
+  <ul ng-repeat="meme in memes">
+    <li>
+      <img src="{{meme.imageUrl}}"/>
+      <p>{{meme.description}}</p>
+    </li>
+  </ul>
 </div>

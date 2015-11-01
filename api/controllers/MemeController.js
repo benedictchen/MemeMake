@@ -6,6 +6,13 @@
  */
 
 module.exports = {
-	
+
+  /**
+   * Websocket request check endpoint.
+   */
+  addConv: function(req, res) {
+    console.log('checking websocket stuff.', req.params.all(), req.socket.id);
+  }
+
 };
 
