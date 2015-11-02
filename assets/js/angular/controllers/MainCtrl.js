@@ -1,6 +1,6 @@
 angular.module('mainApp').controller('MainCtrl', [
-  '$scope', 'MemeService', '$http',
-  function($scope, MemeService, $http) {
+  '$scope', 'MemeService', '$http', '$location',
+  function($scope, MemeService, $http, $location) {
 
   // Connect to the socket.
   io.socket.get('/meme/addconv');
@@ -8,6 +8,7 @@ angular.module('mainApp').controller('MainCtrl', [
   $scope.memes = [];
   $scope.memeTemplates = [];
   $scope.isUploading = false;
+  $scope.generatedMeme = null;
 
   $scope.selectedTemplate = null;
 
@@ -42,6 +43,20 @@ angular.module('mainApp').controller('MainCtrl', [
 
   $scope.isoStrToDate = function(isoString) {
     return Date.parse(isoString);
+  };
+
+  $scope.saveMeme = function() {
+    if (!$scope.generatedMeme) {
+      console.error('No meme.');
+      return;
+    }
+    var description = $scope.upperRowText + ' ' +
+                      $scope.middleRowText + ' ' +
+                      $scope.bottomRowText;
+    MemeService.saveMeme($scope.generatedMeme, description)
+      .then(function() {
+        $location.path('/recent');
+      });
   };
 
   /**

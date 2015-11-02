@@ -1,5 +1,6 @@
 angular.module('mainApp').directive('memegen', function() {
   return {
+    require: 'ngModel',
     scope: {
       font: '@',
       topText: '@',
@@ -8,17 +9,12 @@ angular.module('mainApp').directive('memegen', function() {
       image: '@',
     },
     template: '<canvas width="400" height="300"/>',
-    link: function(scope, element, attrs, controller, transcludeFn) {
+    link: function(scope, element, attrs, ngModel) {
       var canvas = scope.canvas = element.find('canvas')[0];
       var context = scope.context = scope.canvas.getContext('2d');
       var image = new Image();
+      image.setAttribute('crossOrigin', 'anonymous');
       var topText = middleText = bottomText = '';
-
-      // Text Variables
-      context.fillStyle = 'white';
-      context.strokeStyle = 'black';
-      context.textAlign = 'center';
-      context.lineCap = 'round';
 
       var drawImage = function() {
         // Resize canvas
@@ -29,13 +25,15 @@ angular.module('mainApp').directive('memegen', function() {
       };
 
       var drawTextAtPositionY = function(text, positionY) {
-        console.log(text, positionY);
+        // Text Variables
+        context.fillStyle = 'white';
+        context.strokeStyle = 'black';
+        context.lineCap = 'round';
         var size = image.height / 6;
         context.font = size + 'px Impact';
         context.lineWidth = size / 32;
         while (context.measureText(text).width > canvas.width) {
           size--;
-          console.log('SIZE', size, context.measureText(text).width, canvas.width)
           context.font = size + 'px Impact';
           context.lineWidth = size / 32;
         }
@@ -62,14 +60,15 @@ angular.module('mainApp').directive('memegen', function() {
         // Draw bottom text
         context.textBaseline = 'bottom';
         drawTextAtPositionY(bottomText, canvas.height);
+
+        // Set value to ngModel
+        ngModel.$setViewValue(canvas.toDataURL());
       };
 
       scope.$watch('image', function(imageUrl) {
-        console.log('imageUrl', imageUrl)
         image.src = imageUrl;
         // Set the canvas dimensions (height, width)
         image.onload = function() {
-          console.log('image loaded.', image.height, image.width);
           drawImage();
         };
       });

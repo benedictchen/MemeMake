@@ -49,10 +49,12 @@
     <form class="well">
       <div class="form-group">
         <h4 class="truncate">{{selectedTemplate.title}}</h4>
-        <memegen top-text="{{upperRowText}}"
-                  middle-text="{{middleRowText}}"
-                  bottom-text="{{bottomRowText}}"
-                  image="{{selectedTemplate.imageUrl}}"></memegen>
+        <memegen
+          ng-model="generatedMeme"
+          top-text="{{upperRowText}}"
+          middle-text="{{middleRowText}}"
+          bottom-text="{{bottomRowText}}"
+          image="{{selectedTemplate.imageUrl}}"></memegen>
 <!--
         <img class="meme-template"
              ng-src="{{selectedTemplate.imageUrl}}"
@@ -74,7 +76,7 @@
           class="form-control"
           placeholder="Bottom Row Text"/>
       </div>
-      <button class="btn btn-success">
+      <button class="btn btn-success" ng-click="saveMeme()">
         Save
       </button>
     </form>

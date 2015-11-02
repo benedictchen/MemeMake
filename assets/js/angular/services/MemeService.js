@@ -20,7 +20,7 @@ angular.module('mainApp').factory('MemeService', [
         var deferred = $q.defer();
         $http.get('/meme', {
           params: {
-            sort: 'createdAt ASC'
+            sort: 'createdAt DESC'
           }
         }).success(function(result) {
           deferred.resolve(result);
@@ -89,6 +89,38 @@ angular.module('mainApp').factory('MemeService', [
           }).catch(function(err) {
             deferred.reject(err);
           });
+        return deferred.promise;
+      },
+
+      saveMeme: function(memeData, description) {
+        if (!memeData || !description) {
+          throw new Error('Required Params:\n' + memeData + '\n' + description);
+        }
+        var deferred = $q.defer();
+         // Convert to blob for upload.
+        var parts = memeData.split(',');
+        var mime = 'image/png';
+        var blobBin = atob(parts[1]);
+        var buffer = [];
+        for(var i = 0; i < blobBin.length; i++) {
+            buffer.push(blobBin.charCodeAt(i));
+        }
+        var blob = new Blob([ new Uint8Array(buffer) ], { type: mime });
+        var randomNum = Math.floor(Math.random() * 100);
+        blob.name = 'Meme-' + Date.now() + randomNum + '.png';
+        // Upload to AWS.
+        MemeService.uploadFile(blob).then(function(imageUrl) {
+          $http.put('/meme/create', {
+            description: description,
+            imageUrl: imageUrl
+          }).success(function(result) {
+            deferred.resolve(result);
+          }).error(function(err) {
+            deferred.reject(err);
+          });
+        }).catch(function() {
+          console.error(arguments);
+        });
         return deferred.promise;
       },
 
