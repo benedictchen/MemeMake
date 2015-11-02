@@ -27,6 +27,9 @@
     "angular-file-model": "~0.3.1",
     "angular-bootstrap": "~0.14.3",
     "bootstrap": "~3.3.5",
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "angular-moment": "~0.10.3",
+    "DateJS": "datejs#~1.0.0-rc3",
+    "moment": "~2.10.6"
   }
 }

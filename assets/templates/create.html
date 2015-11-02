@@ -2,38 +2,100 @@
   <div class="page-header">
     <h1>Create A Meme</h1>
   </div>
-  <ul>
-    <li>Choose a template or upload one.</li>
-    <li>Write your text</li>
-    <li>Save it.</li>
-  </ul>
-
-  <div>
-    <h3>Choose Template</h3>
+  <div ng-hide="selectedTemplate">
+      <h3>Instructions</h3>
     <hr/>
-    <ul ng-repeat="template in memeTemplates">
-      <li>
-        <span>{{template.title}}</span>
-        <img class="meme-template preview" ng-src="{{template.imageUrl}}"/>
-      </li>
+    <ul>
+      <li>Choose a template or upload one.</li>
+      <li>Write your text</li>
+      <li>Save it.</li>
     </ul>
   </div>
 
-  <div>
-    <h3>Add Text</h3>
+
+  <div ng-hide="selectedTemplate">
     <hr/>
+    <h3>Choose Template</h3>
+    <hr/>
+    <div class="form-group">
+      <input class="form-control search" type="text"
+      ng-model="templateSearch" placeholder="Search Templates" />
+    </div>
+
+    <ul ng-repeat="template in filteredTemplates = (memeTemplates | filter: templateSearch)" class="meme-template-list">
+      <li>
+        <img class="meme-template preview"
+              ng-src="{{template.imageUrl}}"
+              ng-click="setSelectedTemplate(template)"
+              uib-tooltip="{{template.title}}"/>
+      </li>
+    </ul>
+    <p ng-hide="filteredTemplates.length">
+      No search results found.
+    </p>
   </div>
 
-  <div>
+  <div ng-show="selectedTemplate">
+    <h3>Add Text</h3>
+    <hr/>
+    <div ng-show="selectedTemplate">
+      <button class="btn btn-default btn-sm"
+              ng-click="clearSelectedTemplate()"
+              ng-show="selectedTemplate">
+        Change Template
+      </button>
+    </div>
+    <hr/>
+    <form class="well">
+      <div class="form-group">
+        <h4 class="truncate">{{selectedTemplate.title}}</h4>
+        <memegen top-text="{{upperRowText}}"
+                  middle-text="{{middleRowText}}"
+                  bottom-text="{{bottomRowText}}"
+                  image="{{selectedTemplate.imageUrl}}"></memegen>
+<!--
+        <img class="meme-template"
+             ng-src="{{selectedTemplate.imageUrl}}"
+             ng-show="selectedTemplate"/> -->
+
+      </div>
+      <div class="form-group">
+        <input type="text" ng-model="upperRowText"
+          class="form-control"
+          placeholder="Upper Row Text"/>
+      </div>
+      <div class="form-group">
+        <input type="text" ng-model="middleRowText"
+          class="form-control"
+          placeholder="Middle Row Text"/>
+      </div>
+      <div class="form-group">
+        <input type="text" ng-model="bottomRowText"
+          class="form-control"
+          placeholder="Bottom Row Text"/>
+      </div>
+      <button class="btn btn-success">
+        Save
+      </button>
+    </form>
+  </div>
+
+  <div ng-hide="selectedTemplate">
+    <hr/>
     <h3>Upload Template</h3>
     <hr/>
     <form class="well">
-      <input type="text" ng-model="templateTitle" placeholder="Title (required)" required/>
-      <input class="btn btn-default" type="file" file-model='templateImageFile' required/>
+      <div class="form-group">
+        <input type="text" ng-model="templateTitle"
+          class="form-control"
+          placeholder="Title (required)" required/>
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="file" file-model='templateImageFile' required/>
+      </div>
       <button class="btn btn-default" ng-click="uploadTemplate()" ng-hide="isUploading">
         Upload, Yo!
       </button>
     </form>
   </div>
-
 </div>

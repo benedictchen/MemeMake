@@ -32,6 +32,8 @@ var jsFilesToInject = [
   'js/dependencies/sails.io.js',
 
   // Bower
+  'bower_components/DateJS/build/date.js',
+  'bower_components/moment/moment.js',
   'bower_components/jquery/dist/jquery.js',
   'bower_components/bootstrap/dist/js/bootstrap.js',
   'bower_components/angular/angular.js',
@@ -39,6 +41,7 @@ var jsFilesToInject = [
   'bower_components/angular-file-model/angular-file-model.js',
   'bower_components/angular-bootstrap/ui-bootstrap.js',
   'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+  'bower_components/angular-moment/angular-moment.js',
 
   // Dependencies like jQuery, or Angular are brought in here
   'js/dependencies/**/*.js',

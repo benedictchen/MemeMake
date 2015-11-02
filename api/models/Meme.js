@@ -9,7 +9,7 @@ module.exports = {
 
   attributes: {
     description: { type: 'string' },
-    imageUrl: { type: 'string' },
+    imageUrl: { type: 'string', required: true},
   }
 };
 

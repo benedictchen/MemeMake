@@ -1,4 +1,4 @@
-app.controller('MainCtrl', [
+angular.module('mainApp').controller('MainCtrl', [
   '$scope', 'MemeService', '$http',
   function($scope, MemeService, $http) {
 
@@ -9,6 +9,8 @@ app.controller('MainCtrl', [
   $scope.memeTemplates = [];
   $scope.isUploading = false;
 
+  $scope.selectedTemplate = null;
+
   /**
    * Retrieves the latest list of memes.
    */
@@ -18,10 +20,28 @@ app.controller('MainCtrl', [
     });
   };
 
+  $scope.listRecent = function() {
+    MemeService.listRecent().then(function(results) {
+      $scope.memes = results;
+    })
+  };
+
   $scope.listTemplates = function() {
     MemeService.listTemplates().then(function(results) {
       $scope.memeTemplates = results;
     });
+  };
+
+  $scope.setSelectedTemplate = function(template) {
+    $scope.selectedTemplate = template;
+  };
+
+  $scope.clearSelectedTemplate = function() {
+    $scope.selectedTemplate = null;
+  };
+
+  $scope.isoStrToDate = function(isoString) {
+    return Date.parse(isoString);
   };
 
   /**
@@ -45,7 +65,7 @@ app.controller('MainCtrl', [
     });
   };
 
-  $scope.list();
+  $scope.listRecent();
   $scope.listTemplates();
 
 }]);

@@ -1,5 +1,5 @@
 var app = angular.module('mainApp', [
-  'ngRoute', 'file-model'
+  'ngRoute', 'file-model', 'ui.bootstrap', 'angularMoment'
 ]);
 
 app.config(['$routeProvider', function($routeProvider) {
