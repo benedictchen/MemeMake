@@ -4,10 +4,12 @@
   </div>
   <ul ng-repeat="meme in memes" class="meme-list clearfix">
     <li class="meme clearfix">
-      <img
+      <div>
+        <img
         ng-src="{{meme.imageUrl}}"
         uib-tooltip="meme.description" />
-      <div class="meme-timestamp" am-time-ago="{{isoStrToDate(meme.createdAt)}}"></div>
+        <div class="meme-timestamp" am-time-ago="{{isoStrToDate(meme.createdAt)}}"></div>
+      </div>
     </li>
   </ul>
 </div>
