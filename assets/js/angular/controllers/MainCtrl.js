@@ -1,4 +1,6 @@
-app.controller('MainCtrl', ['$scope', 'MemeService', function($scope, MemeService) {
+app.controller('MainCtrl', [
+  '$scope', 'MemeService', '$http',
+  function($scope, MemeService, $http) {
 
   // Connect to the socket.
   io.socket.get('/meme/addconv');
@@ -15,6 +17,18 @@ app.controller('MainCtrl', ['$scope', 'MemeService', function($scope, MemeServic
     });
   };
 
+  $scope.uploadFile = function() {
+    var file = $scope.fileModel;
+    console.warn(file)
+    // Get the upload URL, then upload the file to S3.
+    MemeService.uploadFile(file).then(function() {
+      console.warn('SUCCESS!', arguments);
+    }).catch(function(err) {
+      console.warn('Fail!', arguments);
+    });
+  };
+
   $scope.list();
+
 
 }]);
