@@ -4,7 +4,7 @@ var app = angular.module('mainApp', [
 
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/', {
-    templateUrl: '/templates/index.html',
+    templateUrl: '/templates/recent.html',
     controller: 'MainCtrl'
   }).when('/create', {
     templateUrl: '/templates/create.html',
