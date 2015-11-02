@@ -30,6 +30,7 @@ var jsFilesToInject = [
   // Bower
   'bower_components/angular/angular.js',
   'bower_components/angular-route/angular-route.js',
+  'bower_components/angular-file-model/angular-file-model.js',
 
   // Dependencies like jQuery, or Angular are brought in here
   'js/dependencies/**/*.js',

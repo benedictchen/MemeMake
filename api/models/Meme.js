@@ -8,7 +8,7 @@
 module.exports = {
 
   attributes: {
-    description: { type: 'string' }
+    description: { type: 'string' },
     imageUrl: { type: 'string' }
   }
 };

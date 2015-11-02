@@ -12,6 +12,10 @@
 
 module.exports = {
 
+  AWS_ACCESS_KEY_ID: 'AKIAJQN5AXVT4ICQ4CJQ',
+  AWS_SECRET_ACCESS_KEY: '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',
+  S3_BUCKET_NAME: 'mememake',
+
   /***************************************************************************
    * Set the default database connection for models in the development       *
    * environment (see config/connections.js and config/models.js )           *
