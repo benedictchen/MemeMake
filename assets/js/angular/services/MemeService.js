@@ -2,6 +2,20 @@ angular.module('mainApp').factory('MemeService', [
   '$http', '$q',
   function($http, $q) {
     var MemeService = {
+
+      getMemeById: function(memeId) {
+        if (!memeId) {
+          throw new TypeError('Must provide meme ID');
+        }
+        var deferred = $q.defer();
+        $http.get('/meme/' + memeId).success(function(result) {
+          deferred.resolve(result);
+        }).error(function(err) {
+          deferred.reject(err);
+        });
+        return deferred.promise;
+      },
+
       /**
        * Lists all memes.
        * @return {Promise} Promise that may be fulfilled asynchronously.
