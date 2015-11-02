@@ -16,7 +16,11 @@ var tmpPath = '.tmp/public/';
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
-  'styles/**/*.css'
+  // Bower components
+  'bower_components/angular-bootstrap/ui-bootstrap-csp.css',
+  'bower_components/bootstrap/dist/css/bootstrap.css',
+  // 'bower_components/bootstrap/dist/css/bootstrap-theme.css',
+  'styles/**/*.css',
 ];
 
 
@@ -28,9 +32,13 @@ var jsFilesToInject = [
   'js/dependencies/sails.io.js',
 
   // Bower
+  'bower_components/jquery/dist/jquery.js',
+  'bower_components/bootstrap/dist/js/bootstrap.js',
   'bower_components/angular/angular.js',
   'bower_components/angular-route/angular-route.js',
   'bower_components/angular-file-model/angular-file-model.js',
+  'bower_components/angular-bootstrap/ui-bootstrap.js',
+  'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
 
   // Dependencies like jQuery, or Angular are brought in here
   'js/dependencies/**/*.js',

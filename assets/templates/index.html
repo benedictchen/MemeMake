@@ -1,16 +1,14 @@
-<div>
-  <h1>Memes</h1>{{memes}}
-  <ul ng-repeat="meme in memes">
-    <li>
-      <img src="{{meme.imageUrl}}"/>
-      <p>{{meme.description}}</p>
-    </li>
-  </ul>
-</div>
-
-
-<div>
-<h1>Upload</h1>
-<input type="file" file-model='fileModel' />
-<button ng-click="uploadFile()">Upload, Yo!<button>
+<div class="apa">
+  <div>
+    <div class="page-header">
+      <h1>Memes</h1>
+    </div>
+    <ul ng-repeat="meme in memes">
+      <li>
+        <img ng-src="{{meme.imageUrl}}"/>
+        <p>{{meme.description}}</p>
+      </li>
+    </ul>
+    <div ng-hide="memes.length">No memes, yet.</div>
+  </div>
 </div>

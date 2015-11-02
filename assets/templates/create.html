@@ -1,0 +1,39 @@
+<div>
+  <div class="page-header">
+    <h1>Create A Meme</h1>
+  </div>
+  <ul>
+    <li>Choose a template or upload one.</li>
+    <li>Write your text</li>
+    <li>Save it.</li>
+  </ul>
+
+  <div>
+    <h3>Choose Template</h3>
+    <hr/>
+    <ul ng-repeat="template in memeTemplates">
+      <li>
+        <span>{{template.title}}</span>
+        <img class="meme-template preview" ng-src="{{template.imageUrl}}"/>
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <h3>Add Text</h3>
+    <hr/>
+  </div>
+
+  <div>
+    <h3>Upload Template</h3>
+    <hr/>
+    <form class="well">
+      <input type="text" ng-model="templateTitle" placeholder="Title (required)" required/>
+      <input class="btn btn-default" type="file" file-model='templateImageFile' required/>
+      <button class="btn btn-default" ng-click="uploadTemplate()" ng-hide="isUploading">
+        Upload, Yo!
+      </button>
+    </form>
+  </div>
+
+</div>

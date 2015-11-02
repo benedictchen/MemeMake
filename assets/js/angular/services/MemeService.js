@@ -17,6 +17,20 @@ angular.module('mainApp').factory('MemeService', [
       },
 
       /**
+       * Lists all templates.
+       * @return {Promise} Promise that may be fulfilled asynchronously.
+       */
+      listTemplates: function() {
+        var deferred = $q.defer();
+        $http.get('/memetemplate').success(function(result) {
+          deferred.resolve(result);
+        }).error(function(err) {
+          deferred.reject(err);
+        });
+        return deferred.promise;
+      },
+
+      /**
        * Gets a URL to upload an asset to.
        * @param {String} fileName Name of the file to upload.
        * @param {String} fileType File MIME type to be uploaded.
@@ -44,15 +58,17 @@ angular.module('mainApp').factory('MemeService', [
        */
       uploadFile: function(file) {
         var deferred = $q.defer();
+        var url = '';
         MemeService.getSignedUploadUrl(file.name, file.type)
           .then(function(result) {
+            url = result.url;
             $http.put(result.data, file, {
               headers: {
                 'Content-Type': file.type,
                 'x-amz-acl': 'public-read',
               },
             }).success(function(result) {
-              deferred.resolve(result);
+              deferred.resolve(url);
             }).error(function(err) {
               deferred.reject(err);
             })
@@ -62,7 +78,30 @@ angular.module('mainApp').factory('MemeService', [
         return deferred.promise;
       },
 
+      /**
+       * Creates a new template based on an existing URL.
+       * @param {String} title Title of the template.
+       * @param {String} url The URL of the template.
+       * @return {Promise} A promise for the payload results.
+       */
+      createTemplate: function(title, url) {
+        if (!title || !url) {
+          throw new Error('Required params:\n' + title + ' \n ' + url);
+        }
+        var deferred = $q.defer();
+        $http.put('/memetemplate/create', {
+          title: title,
+          imageUrl: url
+        }).success(function(result) {
+          deferred.resolve(result);
+        }).error(function(err) {
+          deferred.reject(err);
+        });
+        return deferred.promise;
+      }
     };
+
+
     return MemeService;
   }
 ]);
