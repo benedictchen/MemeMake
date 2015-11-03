@@ -50,9 +50,13 @@ angular.module('mainApp').controller('MainCtrl', [
       console.error('No meme.');
       return;
     }
-    var description = $scope.upperRowText  || '' + ' ' +
-                      $scope.middleRowText || '' + ' ' +
-                      $scope.bottomRowText || '';
+    var description = ($scope.upperRowText  || '') + ' ' +
+                      ($scope.middleRowText || '') + ' ' +
+                      ($scope.bottomRowText || '');
+    if (!description.trim()) {
+      return;
+    }
+
     MemeService.saveMeme($scope.generatedMeme, description)
       .then(function() {
         $location.path('/recent');
