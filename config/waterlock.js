@@ -56,13 +56,13 @@ module.exports.waterlock = {
   jsonWebTokens:{
 
     // CHANGE THIS SECRET
-    secret: 'this is my secret',
+    secret: 'web token secrets are awksome?',
     expiry:{
       unit: 'days',
       length: '7'
     },
-    audience: 'app name',
-    subject: 'subject',
+    audience: 'MemeMon',
+    subject: 'MemeMon MemeGenerator',
 
     // tracks jwt usage if set to true
     trackUsage: true,
@@ -84,7 +84,7 @@ module.exports.waterlock = {
     // configure whether or not to include
     // the user in the respnse - this is useful if
     // JWT is the default response for succesfull login
-    includeUserInJwtResponse: false
+    includeUserInJwtResponse: true
   },
 
   // Post Actions

@@ -22,8 +22,8 @@
       ng-model="templateSearch" placeholder="Search Templates" />
     </div>
 
-    <ul ng-repeat="template in filteredTemplates = (memeTemplates | filter: templateSearch)" class="meme-template-list">
-      <li>
+    <ul class="meme-template-list">
+      <li ng-repeat="template in filteredTemplates = (memeTemplates | filter: templateSearch)">
         <img class="meme-template preview"
               ng-src="{{template.imageUrl}}"
               ng-click="setSelectedTemplate(template)"
