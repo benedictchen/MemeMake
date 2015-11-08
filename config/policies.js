@@ -26,7 +26,25 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  // '*': true,
+  '*': true,
+
+  MemeController: {
+    '*': ['sessionAuth'],
+    'find': true,
+    'findOne': true,
+    'remove': false,
+    'addConv': true,
+    'getSignedUploadUrl': true,
+  },
+
+  MemeTemplateController: {
+    '*': ['sessionAuth'],
+    'create': true,
+    'find': true,
+    'findOne': true,
+    'remove': false,
+
+  },
 
   /***************************************************************************
   *                                                                          *

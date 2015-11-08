@@ -77,6 +77,8 @@ angular.module('mainApp').controller('MainCtrl', [
       .then(function() {
         $scope.isUploading = false;
         $scope.listTemplates();
+        $scope.templateImageFile = null;
+        $scope.templateTitle = null;
       });
     }).catch(function(err) {
       $scope.isUploading = false;
