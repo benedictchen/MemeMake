@@ -1,5 +1,9 @@
 var app = angular.module('mainApp', [
-  'ngRoute', 'file-model', 'ui.bootstrap', 'angularMoment',
+  'satellizer',
+  'ngRoute',
+  'file-model',
+  'ui.bootstrap',
+  'angularMoment',
 ]);
 
 app.config(['$routeProvider', function($routeProvider) {
@@ -25,4 +29,31 @@ app.config(['$routeProvider', function($routeProvider) {
     templateUrl: '/templates/show.html',
     controller: 'MemeDetailCtrl'
   });
+}]);
+
+
+app.config(['$authProvider', function($authProvider) {
+
+$authProvider.withCredentials = true;
+$authProvider.tokenRoot = null;
+$authProvider.cordova = false;
+$authProvider.baseUrl = '/';
+$authProvider.loginUrl = '/auth/login';
+$authProvider.signupUrl = '/auth/signup';
+$authProvider.unlinkUrl = '/auth/unlink/';
+$authProvider.tokenName = 'token';
+$authProvider.tokenPrefix = 'satellizer';
+$authProvider.authHeader = 'Authorization';
+$authProvider.authToken = 'Bearer';
+$authProvider.storageType = 'localStorage';
+
+
+   $authProvider.github({
+      clientId: '0a95ec76cfb9680b5569'
+    });
+
+    $authProvider.facebook({
+      clientId: '977758255618510'
+    });
+
 }]);

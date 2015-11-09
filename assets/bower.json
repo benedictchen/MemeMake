@@ -32,6 +32,7 @@
     "DateJS": "datejs#~1.0.0-rc3",
     "moment": "~2.10.6",
     "angularjs-filters": "~0.0.2",
-    "gifshot": "~0.3.2"
+    "gifshot": "~0.3.2",
+    "satellizer": "~0.13.0"
   }
 }
