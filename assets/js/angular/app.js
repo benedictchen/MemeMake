@@ -6,6 +6,7 @@ var app = angular.module('mainApp', [
   'angularMoment',
 ]);
 
+
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/', {
     templateUrl: '/templates/recent.html',
@@ -28,24 +29,33 @@ app.config(['$routeProvider', function($routeProvider) {
   }).when('/meme/:memeId', {
     templateUrl: '/templates/show.html',
     controller: 'MemeDetailCtrl'
+  }).when('/login', {
+    templateUrl: '/templates/login.html',
+    controller: 'LoginCtrl',
+  }).when('/register', {
+    templateUrl: '/templates/register.html',
+    controller: 'RegisterCtrl',
   });
 }]);
 
+app.config(['$httpProvider', function($httpProvider) {
+  $httpProvider.interceptors.push('AuthInterceptor');
+}]);
 
 app.config(['$authProvider', function($authProvider) {
 
-$authProvider.withCredentials = true;
-$authProvider.tokenRoot = null;
-$authProvider.cordova = false;
-$authProvider.baseUrl = '/';
-$authProvider.loginUrl = '/auth/login';
-$authProvider.signupUrl = '/auth/signup';
-$authProvider.unlinkUrl = '/auth/unlink/';
-$authProvider.tokenName = 'token';
-$authProvider.tokenPrefix = 'satellizer';
-$authProvider.authHeader = 'Authorization';
-$authProvider.authToken = 'Bearer';
-$authProvider.storageType = 'localStorage';
+  $authProvider.withCredentials = true;
+  $authProvider.tokenRoot = null;
+  $authProvider.cordova = false;
+  $authProvider.baseUrl = '/';
+  $authProvider.loginUrl = '/auth/login';
+  $authProvider.signupUrl = '/auth/signup';
+  $authProvider.unlinkUrl = '/auth/unlink/';
+  $authProvider.tokenName = 'token';
+  $authProvider.tokenPrefix = 'satellizer';
+  $authProvider.authHeader = 'Authorization';
+  $authProvider.authToken = 'Bearer';
+  $authProvider.storageType = 'localStorage';
 
 
    $authProvider.github({
@@ -53,7 +63,9 @@ $authProvider.storageType = 'localStorage';
     });
 
     $authProvider.facebook({
-      clientId: '977758255618510'
+      clientId: '977758255618510',
+      url: '/auth/login?type=facebook',
+      authorizationEndpoint: 'https://www.facebook.com/v2.5/dialog/oauth',
     });
 
 }]);
