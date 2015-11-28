@@ -71,8 +71,12 @@ angular.module('mainApp').factory('MemeService', [
             file_name: fileName,
             file_type: fileType
           }
-        }).success(function(result) {
-          deferred.resolve(result);
+        }).success(function(result, status) {
+          if (!(status && status >= 200 && status < 400)) {
+            deferred.reject(result);
+          } else {
+            deferred.resolve(result);
+          }
         }).error(function(err) {
           deferred.reject(err);
         });
@@ -89,7 +93,7 @@ angular.module('mainApp').factory('MemeService', [
         var url = '';
         MemeService.getSignedUploadUrl(file.name, file.type)
           .then(function(result) {
-            console.log(result);
+            console.log('getSignedUploadUrl', result);
             url = result.url;
             $http.put(result.data, file, {
               headers: {

@@ -30,6 +30,7 @@
     "jquery": "~2.1.4",
     "angular-moment": "~0.10.3",
     "DateJS": "datejs#~1.0.0-rc3",
-    "moment": "~2.10.6"
+    "moment": "~2.10.6",
+    "angular-ui-notification": "~0.1.0"
   }
 }
