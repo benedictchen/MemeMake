@@ -89,6 +89,7 @@ angular.module('mainApp').factory('MemeService', [
         var url = '';
         MemeService.getSignedUploadUrl(file.name, file.type)
           .then(function(result) {
+            console.log(result);
             url = result.url;
             $http.put(result.data, file, {
               headers: {
@@ -96,6 +97,7 @@ angular.module('mainApp').factory('MemeService', [
                 'x-amz-acl': 'public-read',
               },
             }).success(function(result) {
+              console.log(result)
               deferred.resolve(url);
             }).error(function(err) {
               deferred.reject(err);
@@ -128,6 +130,7 @@ angular.module('mainApp').factory('MemeService', [
             description: description,
             imageUrl: imageUrl
           }).success(function(result) {
+            console.log(result)
             deferred.resolve(result);
           }).error(function(err) {
             deferred.reject(err);

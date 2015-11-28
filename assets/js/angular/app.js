@@ -26,3 +26,48 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'MemeDetailCtrl'
   });
 }]);
+
+app.factory('RequestInterceptor', [
+  '$rootScope', 
+  function($rootScope) {
+    return {
+      responseError: function(response) {
+        if (response.status === 401 || response.status === 403) {
+          console.log('Unauthorized response detected...');
+          $rootScope.$broadcast('unauthorized');
+        }
+        return response;
+      }
+    };
+  }
+]);
+
+app.config(['$httpProvider', function($httpProvider) {
+  $httpProvider.interceptors.push('RequestInterceptor');
+}]);
+
+app.run([
+  '$rootScope', 
+  '$templateRequest', function($rootScope, $templateRequest) {
+  
+  var modalTimer = null;
+
+  $rootScope.$on('unauthorized', function() {
+    
+    // Show login modal.
+    $templateRequest('/templates/login.html')
+      .then(function(loginTemplate) {
+        if (modalTimer) {
+          clearTimeout(modalTimer);
+        }
+        modalTimer = setTimeout(function() {
+          $(loginTemplate).modal({
+            keyboard: true,
+            show: true,
+            backdrop: false
+          });
+        }, 500);
+      });
+  });
+
+}]);

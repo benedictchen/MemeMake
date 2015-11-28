@@ -58,8 +58,17 @@ angular.module('mainApp').controller('MainCtrl', [
     }
 
     MemeService.saveMeme($scope.generatedMeme, description)
-      .then(function() {
-        $location.path('/recent');
+      .then(function(response) {
+        console.log(response)
+        if (response.status === 200) {
+          // Success notification.
+          $location.path('/recent');  
+        } else {
+          // Error notification
+          console.log('errorrr!')
+        }
+      }).catch(function() {
+         console.log('errorrr!', arguments)
       });
   };
 
@@ -74,9 +83,14 @@ angular.module('mainApp').controller('MainCtrl', [
     $scope.isUploading = true;
     MemeService.uploadFile(file).then(function(url) {
       MemeService.createTemplate(title, url)
-      .then(function() {
+      .then(function(response) {
+        if (response.status === 200) {
+          $scope.listTemplates();  
+        } else {
+          // Error notification.
+        }
         $scope.isUploading = false;
-        $scope.listTemplates();
+        
       });
     }).catch(function(err) {
       $scope.isUploading = false;
