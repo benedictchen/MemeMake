@@ -20,6 +20,7 @@ var cssFilesToInject = [
   'bower_components/angular-bootstrap/ui-bootstrap-csp.css',
   'bower_components/bootstrap/dist/css/bootstrap.css',
   // 'bower_components/bootstrap/dist/css/bootstrap-theme.css',
+  'bower_components/angular-ui-notification/dist/angular-ui-notification.css',
   'styles/**/*.css',
   'styles/**/*.less',
 ];
@@ -43,6 +44,7 @@ var jsFilesToInject = [
   'bower_components/angular-bootstrap/ui-bootstrap.js',
   'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
   'bower_components/angular-moment/angular-moment.js',
+  'bower_components/angular-ui-notification/dist/angular-ui-notification.js',
 
   // Dependencies like jQuery, or Angular are brought in here
   'js/dependencies/**/*.js',
