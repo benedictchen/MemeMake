@@ -1,9 +1,5 @@
 var app = angular.module('mainApp', [
-  'satellizer',
-  'ngRoute',
-  'file-model',
-  'ui.bootstrap',
-  'angularMoment',
+  'ngRoute', 'file-model', 'ui.bootstrap', 'angularMoment', 'ui-notification'
 ]);
 
 
@@ -38,34 +34,80 @@ app.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
+app.factory('RequestInterceptor', [
+  '$rootScope',
+  function($rootScope) {
+    return {
+      responseError: function(response) {
+        console.warn(response);
+        if (/^\/auth/.test(response.config.url)) {
+          return response;
+        }
+        if (response.status === 401 || response.status === 403) {
+          console.log('Unauthorized response detected...');
+          $rootScope.$broadcast('unauthorized');
+        }
+        return response;
+      }
+    };
+  }
+]);
+
 app.config(['$httpProvider', function($httpProvider) {
-  $httpProvider.interceptors.push('AuthInterceptor');
+  $httpProvider.interceptors.push('RequestInterceptor');
 }]);
 
-app.config(['$authProvider', function($authProvider) {
+app.run([
+  '$rootScope',
+  '$templateRequest',
+  '$templateCache',
+  '$compile',
+  '$uibModal',
+  function($rootScope, $templateRequest, $templateCache, $compile, $uibModal) {
 
-  $authProvider.withCredentials = true;
-  $authProvider.tokenRoot = null;
-  $authProvider.cordova = false;
-  $authProvider.baseUrl = '/';
-  $authProvider.loginUrl = '/auth/login';
-  $authProvider.signupUrl = '/auth/signup';
-  $authProvider.unlinkUrl = '/auth/unlink/';
-  $authProvider.tokenName = 'token';
-  $authProvider.tokenPrefix = 'satellizer';
-  $authProvider.authHeader = 'Authorization';
-  $authProvider.authToken = 'Bearer';
-  $authProvider.storageType = 'localStorage';
+  var modalTimer = null;
 
+  $rootScope.$on('unauthorized', function() {
 
-   $authProvider.github({
-      clientId: '0a95ec76cfb9680b5569'
-    });
+    // var showModal = function(template) {
+    //   if (modalTimer) {
+    //     clearTimeout(modalTimer);
+    //   }
+    //   var compiledTemplate = $compile(template)($rootScope);
+    //   modalTimer = setTimeout(function() {
+    //     $(compiledTemplate).modal({
+    //       keyboard: true,
+    //       show: true,
+    //       backdrop: false
+    //     });
+    //   }, 500);
+    // };
 
-    $authProvider.facebook({
-      clientId: '977758255618510',
-      url: '/auth/login?type=facebook',
-      authorizationEndpoint: 'https://www.facebook.com/v2.5/dialog/oauth',
-    });
+    // // Show login modal.
+    // var template = $templateCache.get('/templates/login.html');
+    // if (!template) {
+    //   $templateRequest('/templates/login.html').then(function(loginTemplate) {
+    //     $templateCache.put('/templates/login.html', loginTemplate);
+    //     showModal(loginTemplate);
+    //   });
+    // } else {
+    //   showModal(template);
+    // }
+
+    var showModal = function() {
+      if (modalTimer) {
+        clearTimeout(modalTimer);
+      }
+      modalTimer = setTimeout(function() {
+        $uibModal.open({
+          animation: true,
+          templateUrl: '/templates/login.html',
+          controller: 'AuthCtrl'
+        });
+      }, 500);
+    };
+    showModal();
+
+  });
 
 }]);

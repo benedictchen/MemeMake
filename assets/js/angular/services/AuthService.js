@@ -1,34 +1,12 @@
 angular.module('mainApp').factory('AuthService', [
-  '$http', '$q', function($http, $q) {
-    var MemeService = {
-
-      /**
-       * @return {Promise} Promise that may be fulfilled asynchronously.
-       */
-      login: function(username, password) {
+  '$http', '$q',
+  function($http, $q) {
+    var AuthService = {
+      login: function(email, password) {
         var deferred = $q.defer();
         $http.post('/auth/login', {
-          username: username,
-          password: password,
-          type: 'local'
-        }).success(function(result) {
-          deferred.resolve(result);
-        }).error(function(err) {
-          deferred.reject(err);
-        });
-        return deferred.promise;
-      },
-
-      /**
-       * @return {Promise} Promise that may be fulfilled asynchronously.
-       */
-      register: function(username, email, password) {
-        var deferred = $q.defer();
-        $http.post('/auth/register', {
-          username: username,
           email: email,
-          password: password,
-          type: local
+          password: password
         }).success(function(result) {
           deferred.resolve(result);
         }).error(function(err) {
@@ -37,7 +15,18 @@ angular.module('mainApp').factory('AuthService', [
         return deferred.promise;
       },
 
+      register: function(params) {
+        var deferred = $q.defer();
+        $http.post('/auth/register', params).success(function(result) {
+          deferred.resolve(result);
+        }).error(function(err) {
+          deferred.reject(err);
+        });
+        return deferred.promise;
+      },
     };
-    return MemeService;
+    return AuthService;
   }
 ]);
+
+

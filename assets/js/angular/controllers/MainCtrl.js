@@ -1,6 +1,6 @@
 angular.module('mainApp').controller('MainCtrl', [
-  '$scope', 'MemeService', '$http', '$location',
-  function($scope, MemeService, $http, $location) {
+  '$scope', 'MemeService', '$http', '$location', 'Notification',
+  function($scope, MemeService, $http, $location, Notification) {
 
   // Connect to the socket.
   io.socket.get('/meme/addconv');
@@ -58,8 +58,18 @@ angular.module('mainApp').controller('MainCtrl', [
     }
 
     MemeService.saveMeme($scope.generatedMeme, description)
-      .then(function() {
-        $location.path('/recent');
+      .then(function(response) {
+        console.log(response)
+        if (response.status === 200 || response.id) {
+          Notification.success('Successfully created.');
+          // Success notification.
+          $location.path('/recent');
+        } else {
+          // Error notification
+          Notification.error(response);
+        }
+      }).catch(function(err) {
+         Notification.error(err);
       });
   };
 
@@ -74,11 +84,14 @@ angular.module('mainApp').controller('MainCtrl', [
     $scope.isUploading = true;
     MemeService.uploadFile(file).then(function(url) {
       MemeService.createTemplate(title, url)
-      .then(function() {
+      .then(function(response) {
+        if (response.status === 200) {
+          $scope.listTemplates();
+        } else {
+          // Error notification.
+        }
         $scope.isUploading = false;
-        $scope.listTemplates();
-        $scope.templateImageFile = null;
-        $scope.templateTitle = null;
+
       });
     }).catch(function(err) {
       $scope.isUploading = false;

@@ -24,9 +24,8 @@
     "sails": "~0.11.2",
     "sails-disk": "~0.10.0",
     "sails-postgresql": "^0.10.16",
-    "waterlock": "^0.1.2-rc1",
-    "waterlock-facebook-auth": "^0.1.2-rc1",
-    "waterlock-local-auth": "^0.1.2-rc1"
+    "uglifyjs": "^2.4.10",
+    "waterlock-local-auth": "0.0.6"
   },
   "scripts": {
     "debug": "node debug app.js",
@@ -39,7 +38,5 @@
   },
   "author": "benedictchen",
   "license": "",
-  "devDependencies": {
-    "waterlock-local-auth": "^0.1.2-rc1"
-  }
+  "devDependencies": {}
 }

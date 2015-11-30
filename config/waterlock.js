@@ -68,13 +68,13 @@ module.exports.waterlock = {
   jsonWebTokens:{
 
     // CHANGE THIS SECRET
-    secret: 'web token secrets are awksome?',
+    secret: 'this is my secret',
     expiry:{
       unit: 'days',
       length: '7'
     },
-    audience: 'MemeMon',
-    subject: 'MemeMon MemeGenerator',
+    audience: 'app name',
+    subject: 'subject',
 
     // tracks jwt usage if set to true
     trackUsage: true,
