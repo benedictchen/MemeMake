@@ -42,7 +42,7 @@ module.exports.policies = {
     create: ['sessionAuth'],
     update: ['sessionAuth'],
     add: true,
-    getSignedUploadUrl: ['sessionAuth'],
+    // getSignedUploadUrl: ['sessionAuth'],
   },
 
   // RabbitController: {

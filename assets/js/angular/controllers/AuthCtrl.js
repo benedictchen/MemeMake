@@ -1,13 +1,36 @@
 angular.module('mainApp').controller('AuthCtrl', [
-  '$scope', 'Notification',
-  function($scope, Notification) {
+  '$scope', 'Notification', 'AuthService',
+  function($scope, Notification, AuthService) {
 
+    $scope.formData = {};
 
     $scope.login = function() {
-      Notification.success({
-        title: 'Wow!',
-        message: 'You are the best!'
-      });
+      if ($scope.type === 'login') {
+        if (!($scope.formData.email && $scope.formData.password)) {
+          Notification.error({
+            title: 'Error',
+            message: 'Username and/or password missing.'
+          });
+          return;
+        }
+        AuthService.login($scope.formData.email, $scope.formData.password)
+          .then(function(result) {
+            console.log(result);
+            Notification.success({
+              title: 'Success?',
+              message: 'Successfully logged in?'
+            });
+          }).catch(function(err) {
+            Notification.error({
+              title: 'Error',
+              message: JSON.stringify(err)
+            });
+          });
+      }
+    };
+
+    $scope.setType = function(type) {
+      $scope.type = type;
     };
 
   }

@@ -32,6 +32,10 @@ app.factory('RequestInterceptor', [
   function($rootScope) {
     return {
       responseError: function(response) {
+        console.warn(response);
+        if (/^\/auth/.test(response.config.url)) {
+          return response;
+        }
         if (response.status === 401 || response.status === 403) {
           console.log('Unauthorized response detected...');
           $rootScope.$broadcast('unauthorized');

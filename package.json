@@ -24,7 +24,8 @@
     "sails": "~0.11.2",
     "sails-disk": "~0.10.0",
     "sails-postgresql": "^0.10.16",
-    "uglifyjs": "^2.4.10"
+    "uglifyjs": "^2.4.10",
+    "waterlock-local-auth": "0.0.6"
   },
   "scripts": {
     "debug": "node debug app.js",
