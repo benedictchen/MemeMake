@@ -14,6 +14,16 @@ angular.module('mainApp').factory('AuthService', [
         });
         return deferred.promise;
       },
+
+      register: function(params) {
+        var deferred = $q.defer();
+        $http.post('/auth/register', params).success(function(result) {
+          deferred.resolve(result);
+        }).error(function(err) {
+          deferred.reject(err);
+        });
+        return deferred.promise;
+      },
     };
     return AuthService;
   }

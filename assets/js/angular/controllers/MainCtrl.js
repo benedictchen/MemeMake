@@ -60,7 +60,7 @@ angular.module('mainApp').controller('MainCtrl', [
     MemeService.saveMeme($scope.generatedMeme, description)
       .then(function(response) {
         console.log(response)
-        if (response.status === 200) {
+        if (response.status === 200 || response.id) {
           Notification.success('Successfully created.');
           // Success notification.
           $location.path('/recent');

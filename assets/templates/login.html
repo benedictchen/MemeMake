@@ -1,34 +1,64 @@
+<!--
 <div class="modal fade" tabindex="-1" role="dialog" ng-controller="AuthCtrl">
-  <div class="modal-dialog">
+  <div class="modal-dialog">    -->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        	<span aria-hidden="true">&times;</span>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="close()">
+        <span aria-hidden="true">&times;</span>
         </button>
         <h4 class="modal-title">LOGIN</h4>
       </div>
       <div class="modal-body">
-      {{username}} {{email}} {{password}}
-      <!--Modal Contents-->
-      <uib-tabset>
+        <!--Modal Contents-->
+        <uib-tabset>
         <uib-tab heading="Login" select="setType('login')">
-          <form ng-submit="login()">
-            <input type="email" name="email" placeholder="Email" ng-model="formData.email" required/>
-            <input type="password" name="password" placeholder="Password" ng-model="formData.password" required/>
-            <button>Login</button>
-          </form>
+        <form ng-submit="login()">
+          <br/>
+          <div>
+            <input type="email" class="form-control"
+                 name="email" placeholder="Email" ng-model="formData.email" required/>
+          </div>
+          <br/>
+          <div>
+            <input type="password" class="form-control"
+                 name="password" placeholder="Password" ng-model="formData.password" required/>
+          </div>
+          <br/>
+          <hr/>
+          <div>
+            <button class="btn btn-primary">Login</button>
+          </div>
+          <br/>
+        </form>
         </uib-tab>
         <uib-tab heading="Register" select="setType('register')">
-          <form ng-submit="register()">
-            <input type="text" name="email" placeholder="Email" ng-model="formData.email" required/>
-            <input type="text" name="username" placeholder="Username" ng-model="formData.username" required/>
-            <input type="password" name="password" placeholder="Password" ng-model="formData.password" required/>
-            <button>Register</button>
-          </form>
+        <form ng-submit="register()">
+          <br/>
+          <div>
+            <input type="text" name="email" class="form-control"
+                 placeholder="Email" ng-model="formData.email" required/>
+          </div>
+          <br/>
+          <div>
+            <input type="text" class="form-control"
+                 name="username" placeholder="Username" ng-model="formData.username" required/>
+          </div>
+          <br/>
+          <div>
+            <input type="password" class="form-control"
+                 name="password" placeholder="Password" ng-model="formData.password" required/>
+          </div>
+          <br/>
+          <hr/>
+          <div>
+            <button class="btn btn-success">Register</button>
+          </div>
+          <br/>
+        </form>
         </uib-tab>
-      </uib-tabset>
-      <!--End Modal Contents-->
+        </uib-tabset>
+        <!--End Modal Contents-->
       </div>
     </div>
-  </div>
-</div>
+  <!--   </div>
+</div> -->

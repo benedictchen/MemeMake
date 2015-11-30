@@ -54,36 +54,53 @@ app.run([
   '$rootScope',
   '$templateRequest',
   '$templateCache',
-  '$compile', function($rootScope, $templateRequest, $templateCache, $compile) {
+  '$compile',
+  '$uibModal',
+  function($rootScope, $templateRequest, $templateCache, $compile, $uibModal) {
 
   var modalTimer = null;
 
   $rootScope.$on('unauthorized', function() {
 
-    var showModal = function(template) {
+    // var showModal = function(template) {
+    //   if (modalTimer) {
+    //     clearTimeout(modalTimer);
+    //   }
+    //   var compiledTemplate = $compile(template)($rootScope);
+    //   modalTimer = setTimeout(function() {
+    //     $(compiledTemplate).modal({
+    //       keyboard: true,
+    //       show: true,
+    //       backdrop: false
+    //     });
+    //   }, 500);
+    // };
+
+    // // Show login modal.
+    // var template = $templateCache.get('/templates/login.html');
+    // if (!template) {
+    //   $templateRequest('/templates/login.html').then(function(loginTemplate) {
+    //     $templateCache.put('/templates/login.html', loginTemplate);
+    //     showModal(loginTemplate);
+    //   });
+    // } else {
+    //   showModal(template);
+    // }
+
+    var showModal = function() {
       if (modalTimer) {
         clearTimeout(modalTimer);
       }
-      var compiledTemplate = $compile(template)($rootScope);
       modalTimer = setTimeout(function() {
-        $(compiledTemplate).modal({
-          keyboard: true,
-          show: true,
-          backdrop: false
+        $uibModal.open({
+          animation: true,
+          templateUrl: '/templates/login.html',
+          controller: 'AuthCtrl'
         });
       }, 500);
     };
+    showModal();
 
-    // Show login modal.
-    var template = $templateCache.get('/templates/login.html');
-    if (!template) {
-      $templateRequest('/templates/login.html').then(function(loginTemplate) {
-        $templateCache.put('/templates/login.html', loginTemplate);
-        showModal(loginTemplate);
-      });
-    } else {
-      showModal(template);
-    }
   });
 
 }]);
