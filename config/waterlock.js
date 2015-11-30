@@ -35,7 +35,7 @@ module.exports.waterlock = {
               pass: 'userpass'
             }
           },
-          from: 'no-reply@domain.com',
+          from: 'no-reply@mememon.com',
           subject: 'Your password reset!',
           forwardUrl: 'http://localhost:1337'
         },

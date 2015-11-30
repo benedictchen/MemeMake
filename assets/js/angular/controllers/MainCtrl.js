@@ -1,6 +1,6 @@
 angular.module('mainApp').controller('MainCtrl', [
-  '$scope', 'MemeService', '$http', '$location',
-  function($scope, MemeService, $http, $location) {
+  '$scope', 'MemeService', '$http', '$location', 'Notification',
+  function($scope, MemeService, $http, $location, Notification) {
 
   // Connect to the socket.
   io.socket.get('/meme/addconv');
@@ -61,14 +61,15 @@ angular.module('mainApp').controller('MainCtrl', [
       .then(function(response) {
         console.log(response)
         if (response.status === 200) {
+          Notification.success('Successfully created.');
           // Success notification.
-          $location.path('/recent');  
+          $location.path('/recent');
         } else {
           // Error notification
-          console.log('errorrr!')
+          Notification.error(response);
         }
-      }).catch(function() {
-         console.log('errorrr!', arguments)
+      }).catch(function(err) {
+         Notification.error(err);
       });
   };
 
@@ -85,12 +86,12 @@ angular.module('mainApp').controller('MainCtrl', [
       MemeService.createTemplate(title, url)
       .then(function(response) {
         if (response.status === 200) {
-          $scope.listTemplates();  
+          $scope.listTemplates();
         } else {
           // Error notification.
         }
         $scope.isUploading = false;
-        
+
       });
     }).catch(function(err) {
       $scope.isUploading = false;

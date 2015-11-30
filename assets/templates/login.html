@@ -1,4 +1,4 @@
-<div class="modal fade" tabindex="-1" role="dialog">
+<div class="modal fade" tabindex="-1" role="dialog" ng-controller="AuthCtrl">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -14,7 +14,7 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">
         	Close
         </button>
-        <button type="button" class="btn btn-primary">
+        <button type="button" class="btn btn-primary" ng-click="login()">
         	Save changes
         </button>
       </div>

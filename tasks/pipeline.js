@@ -20,9 +20,10 @@ var cssFilesToInject = [
   'bower_components/angular-bootstrap/ui-bootstrap-csp.css',
   'bower_components/bootstrap/dist/css/bootstrap.css',
   // 'bower_components/bootstrap/dist/css/bootstrap-theme.css',
-  'bower_components/angular-ui-notification/dist/angular-ui-notification.css',
+
   'styles/**/*.css',
   'styles/**/*.less',
+  'bower_components/angular-ui-notification/dist/angular-ui-notification.css',
 ];
 
 

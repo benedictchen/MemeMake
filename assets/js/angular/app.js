@@ -1,5 +1,5 @@
 var app = angular.module('mainApp', [
-  'ngRoute', 'file-model', 'ui.bootstrap', 'angularMoment'
+  'ngRoute', 'file-model', 'ui.bootstrap', 'angularMoment', 'ui-notification'
 ]);
 
 app.config(['$routeProvider', function($routeProvider) {
@@ -28,7 +28,7 @@ app.config(['$routeProvider', function($routeProvider) {
 }]);
 
 app.factory('RequestInterceptor', [
-  '$rootScope', 
+  '$rootScope',
   function($rootScope) {
     return {
       responseError: function(response) {
@@ -47,27 +47,39 @@ app.config(['$httpProvider', function($httpProvider) {
 }]);
 
 app.run([
-  '$rootScope', 
-  '$templateRequest', function($rootScope, $templateRequest) {
-  
+  '$rootScope',
+  '$templateRequest',
+  '$templateCache',
+  '$compile', function($rootScope, $templateRequest, $templateCache, $compile) {
+
   var modalTimer = null;
 
   $rootScope.$on('unauthorized', function() {
-    
+
+    var showModal = function(template) {
+      if (modalTimer) {
+        clearTimeout(modalTimer);
+      }
+      var compiledTemplate = $compile(template)($rootScope);
+      modalTimer = setTimeout(function() {
+        $(compiledTemplate).modal({
+          keyboard: true,
+          show: true,
+          backdrop: false
+        });
+      }, 500);
+    };
+
     // Show login modal.
-    $templateRequest('/templates/login.html')
-      .then(function(loginTemplate) {
-        if (modalTimer) {
-          clearTimeout(modalTimer);
-        }
-        modalTimer = setTimeout(function() {
-          $(loginTemplate).modal({
-            keyboard: true,
-            show: true,
-            backdrop: false
-          });
-        }, 500);
+    var template = $templateCache.get('/templates/login.html');
+    if (!template) {
+      $templateRequest('/templates/login.html').then(function(loginTemplate) {
+        $templateCache.put('/templates/login.html', loginTemplate);
+        showModal(loginTemplate);
       });
+    } else {
+      showModal(template);
+    }
   });
 
 }]);
