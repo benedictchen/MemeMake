@@ -2,6 +2,7 @@ var app = angular.module('mainApp', [
   'ngRoute', 'file-model', 'ui.bootstrap', 'angularMoment', 'ui-notification'
 ]);
 
+
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/', {
     templateUrl: '/templates/recent.html',
@@ -24,6 +25,12 @@ app.config(['$routeProvider', function($routeProvider) {
   }).when('/meme/:memeId', {
     templateUrl: '/templates/show.html',
     controller: 'MemeDetailCtrl'
+  }).when('/login', {
+    templateUrl: '/templates/login.html',
+    controller: 'LoginCtrl',
+  }).when('/register', {
+    templateUrl: '/templates/register.html',
+    controller: 'RegisterCtrl',
   });
 }]);
 

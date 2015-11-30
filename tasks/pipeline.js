@@ -41,6 +41,7 @@ var jsFilesToInject = [
   'bower_components/bootstrap/dist/js/bootstrap.js',
   'bower_components/angular/angular.js',
   'bower_components/angular-route/angular-route.js',
+  'bower_components/satellizer/satellizer.js',
   'bower_components/angular-file-model/angular-file-model.js',
   'bower_components/angular-bootstrap/ui-bootstrap.js',
   'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
