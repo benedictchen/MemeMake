@@ -15,9 +15,6 @@
 }
 
 .meme-list {
-  border: 1px solid #ccc;
-  display: inline-block;
-  border-radius: 3px;
   list-style-type: none;
   padding: 0;
 
@@ -28,14 +25,22 @@
       outline: none;
     }
 
-    .meme {
-      display: inline-block;
-      position: relative;
-    }
-
     .meme-timestamp {
       display: block;
     }
+  }
+
+}
+
+.meme {
+  display: inline-block;
+  position: relative;
+  margin: 5px;
+
+  .meme-content {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin: 5px;
   }
 
 }

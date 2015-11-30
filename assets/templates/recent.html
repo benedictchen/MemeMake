@@ -2,13 +2,14 @@
   <div class="page-header">
     <h1>Recent</h1>
   </div>
-  <ul ng-repeat="meme in memes" class="meme-list clearfix">
-    <li class="meme clearfix">
-      <div>
+  <ul class="meme-list clearfix">
+    <li class="meme clearfix" ng-repeat="meme in memes" >
+      <div class="meme-content">
         <a href="/#/meme/{{meme.id}}">
           <img
           ng-src="{{meme.imageUrl}}"
           uib-tooltip="{{meme.description}}" />
+          <p>{{meme.author}}
           <div class="meme-timestamp" am-time-ago="{{isoStrToDate(meme.createdAt)}}"></div>
         </a>
       </div>

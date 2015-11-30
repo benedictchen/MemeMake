@@ -28,12 +28,12 @@ module.exports = {
   connections: {
     postgresLocal: {
       adapter: 'sails-postgresql',
-      // host: 'localhost',
-      // user: 'benedictchen',
-      // password: '',
-      // database: 'mememake',
-      url: 'postgres://mgvaavafmssoum:eidAc3l1aVYJr51lL17PAae6hS@ec2-107-21-219-201.compute-1.amazonaws.com:5432/d7i8o8n92ranvu',
-      ssl: true
+      host: 'localhost',
+      user: 'benedictchen',
+      password: '',
+      database: 'mememake',
+      // url: 'postgres://mgvaavafmssoum:eidAc3l1aVYJr51lL17PAae6hS@ec2-107-21-219-201.compute-1.amazonaws.com:5432/d7i8o8n92ranvu',
+      // ssl: true
     }
   },
 };
