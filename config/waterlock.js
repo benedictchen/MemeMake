@@ -45,18 +45,6 @@ module.exports.waterlock = {
         }
       },
       createOnNotFound: true
-    },
-    {
-        name: 'waterlock-facebook-auth',
-        appId: '977758255618510',
-        appSecret: '8d4db258910fce3548b3586548ff381e',
-        fieldMap: {
-            // <model-field>: <facebook-field>,
-            'firstName': 'first_name',
-            'lastName': 'last_name',
-            'gender': 'gender',
-            'timezone': 'timezone'
-        }
     }
   ],
 
@@ -96,7 +84,7 @@ module.exports.waterlock = {
     // configure whether or not to include
     // the user in the respnse - this is useful if
     // JWT is the default response for succesfull login
-    includeUserInJwtResponse: true
+    includeUserInJwtResponse: false
   },
 
   // Post Actions

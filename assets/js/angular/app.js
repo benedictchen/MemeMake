@@ -27,11 +27,8 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'MemeDetailCtrl'
   }).when('/login', {
     templateUrl: '/templates/login.html',
-    controller: 'LoginCtrl',
-  }).when('/register', {
-    templateUrl: '/templates/register.html',
-    controller: 'RegisterCtrl',
-  });
+    controller: 'AuthCtrl',
+  })
 }]);
 
 app.factory('RequestInterceptor', [
@@ -68,31 +65,6 @@ app.run([
   var modalTimer = null;
 
   $rootScope.$on('unauthorized', function() {
-
-    // var showModal = function(template) {
-    //   if (modalTimer) {
-    //     clearTimeout(modalTimer);
-    //   }
-    //   var compiledTemplate = $compile(template)($rootScope);
-    //   modalTimer = setTimeout(function() {
-    //     $(compiledTemplate).modal({
-    //       keyboard: true,
-    //       show: true,
-    //       backdrop: false
-    //     });
-    //   }, 500);
-    // };
-
-    // // Show login modal.
-    // var template = $templateCache.get('/templates/login.html');
-    // if (!template) {
-    //   $templateRequest('/templates/login.html').then(function(loginTemplate) {
-    //     $templateCache.put('/templates/login.html', loginTemplate);
-    //     showModal(loginTemplate);
-    //   });
-    // } else {
-    //   showModal(template);
-    // }
 
     var showModal = function() {
       if (modalTimer) {

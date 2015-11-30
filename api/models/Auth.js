@@ -10,6 +10,10 @@ module.exports = {
 
   attributes: require('waterlock').models.auth.attributes({
 
+    email: {
+      type: 'string'
+    },
+
     username: {
       type: 'string'
     },
