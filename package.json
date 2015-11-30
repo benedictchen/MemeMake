@@ -36,5 +36,6 @@
     "url": "git://github.com/benedictchen/MemeMake.git"
   },
   "author": "benedictchen",
-  "license": ""
+  "license": "",
+  "devDependencies": {}
 }

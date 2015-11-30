@@ -34,15 +34,15 @@ module.exports.policies = {
   * and its actions                                                          *
   *                                                                          *
   ***************************************************************************/
-	
+
   MemeController: {
     '*': true,
     destroy: false,
     remove: false,
-    create: ['sessionAuth', 'hasJsonWebToken'],
-    update: ['sessionAuth', 'hasJsonWebToken'],
+    create: ['sessionAuth'],
+    update: ['sessionAuth'],
     add: true,
-    getSignedUploadUrl: ['sessionAuth', 'hasJsonWebToken'],
+    getSignedUploadUrl: ['sessionAuth'],
   },
 
   // RabbitController: {
