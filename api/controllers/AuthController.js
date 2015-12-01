@@ -22,7 +22,8 @@ var waterlock = require('waterlock');
     var attr = {
       username: params.username,
       password: params.password
-    }
+    };
+
     attr[scopeKey] = params[scopeKey];
     criteria[scopeKey] = attr[scopeKey];
     waterlock.engine.findAuth(criteria, function(err, user) {
