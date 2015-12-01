@@ -9,13 +9,11 @@
 module.exports = {
 
   attributes: require('waterlock').models.user.attributes({
-    
-    /* e.g.
-    nickname: 'string'
-    */
-    
+
+    memes: { collection: 'Meme', via: 'user' }
+
   }),
-  
+
   beforeCreate: require('waterlock').models.user.beforeCreate,
   beforeUpdate: require('waterlock').models.user.beforeUpdate
 };

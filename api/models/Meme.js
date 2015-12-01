@@ -8,6 +8,8 @@
 module.exports = {
 
   attributes: {
+    user: { collection: 'User', via: 'memes' },
+    author: { type: 'string'},
     description: { type: 'string' },
     imageUrl: { type: 'string', required: true},
   }

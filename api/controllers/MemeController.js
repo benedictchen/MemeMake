@@ -15,6 +15,30 @@ var AWS_S3_BUCKET_NAME = sails.config.S3_BUCKET_NAME;
 
 module.exports = {
 
+  create: function(request, response) {
+    var params = request.allParams();
+    if (!request.session.user) {
+      console.log(request)
+      response.forbidden('User must be logged in to create.');
+      return;
+    }
+    console.log('attempting to create meme by', request.session.user.auth);
+    Meme.create({
+      user: request.session.user,
+      author: request.session.user.auth.username,
+      description: params.description,
+      imageUrl: params.imageUrl
+    }, function(err, record) {
+      console.log('errs:', err);
+      console.log('record', record);
+      if (err) {
+        response.status(err.statusCode).jsonx(err);
+      } else {
+        response.status(200).jsonx(record);
+      }
+    })
+  },
+
   /**
    * Websocket request check endpoint.
    */
@@ -28,7 +52,6 @@ module.exports = {
   getSignedUploadUrl: function(request, response) {
     var fileName = request.query.file_name;
     var fileType = request.query.file_type;
-    console.log(fileName, fileType)
     if (!(fileName && fileType)) {
       response.send(400, 'Must provide file name and type.');
       response.end();

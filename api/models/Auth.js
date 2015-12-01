@@ -6,16 +6,20 @@
  * @docs        :: http://waterlock.ninja/documentation
  */
 
-module.exports = {
+ module.exports = {
 
   attributes: require('waterlock').models.auth.attributes({
 
     email: {
-      type: 'string'
+      type: 'string',
+      required: true,
+      unique: true
     },
 
     username: {
-      type: 'string'
+      type: 'string',
+      required: true,
+      unique: true
     },
 
     password: {

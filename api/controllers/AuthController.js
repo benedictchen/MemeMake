@@ -20,6 +20,7 @@ var waterlock = require('waterlock');
     var scopeKey = def.email !== undefined ? 'email' : 'username';
 
     var attr = {
+      username: params.username,
       password: params.password
     }
     attr[scopeKey] = params[scopeKey];
@@ -35,6 +36,7 @@ var waterlock = require('waterlock');
           if (err) {
             return res.badRequest(err);
           }
+          console.log(user);
           delete user.password;
           return res.ok(user);
         });

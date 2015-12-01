@@ -9,7 +9,8 @@ angular.module('mainApp').controller('AuthCtrl', [
     };
 
     $scope.register = function() {
-      if (!($scope.formData.email && $scope.formData.password)) {
+      if (!($scope.formData.email && $scope.formData.password &&
+            $scope.formData.username)) {
         Notification.error({
           title: 'Error',
           message: 'Username and/or password missing.'
