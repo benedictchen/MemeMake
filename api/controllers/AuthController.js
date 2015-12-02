@@ -37,9 +37,7 @@ var waterlock = require('waterlock');
           if (err) {
             return res.badRequest(err);
           }
-          console.log(user);
-          delete user.password;
-          return res.ok(user);
+          waterlock.cycle.loginSuccess(req, res, user);
         });
       }
     });
