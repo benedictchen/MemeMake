@@ -9,8 +9,14 @@
           <img
           ng-src="{{meme.imageUrl}}"
           uib-tooltip="{{meme.description}}" />
-          <p class="author">{{meme.author}}</p>
-          <div class="meme-timestamp" am-time-ago="{{isoStrToDate(meme.createdAt)}}"></div>
+          <div>
+            <a class="author truncate">{{meme.author}}</a>
+            <span class="meme-timestamp" am-time-ago="{{isoStrToDate(meme.createdAt)}}"></span>
+          </div>
+          <div class="btn-group voting-buttons">
+            <a class="btn btn-default btn-xs">&#x1f44d;</a>
+            <a class="btn btn-default btn-xs">&#x1f44e;</a>
+          </div>
         </a>
       </div>
     </li>
