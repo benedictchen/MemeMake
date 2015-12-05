@@ -14,8 +14,12 @@
             <span class="meme-timestamp" am-time-ago="{{isoStrToDate(meme.createdAt)}}"></span>
           </div>
           <div class="btn-group voting-buttons">
-            <a class="btn btn-default btn-xs">&#x1f44d;</a>
-            <a class="btn btn-default btn-xs">&#x1f44e;</a>
+            <a class="btn btn-default btn-xs" ng-click="upvote(meme.id)">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+            </a>
+            <a class="btn btn-default btn-xs" ng-click="downvote(meme.id)">
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </a>
           </div>
         </a>
       </div>
