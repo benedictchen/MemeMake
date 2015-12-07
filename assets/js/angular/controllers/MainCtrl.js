@@ -1,6 +1,11 @@
 angular.module('mainApp').controller('MainCtrl', [
-  '$scope', 'MemeService', '$http', '$location', 'Notification',
-  function($scope, MemeService, $http, $location, Notification) {
+  '$scope',
+  'MemeService',
+  '$http',
+  '$location',
+  'Notification',
+  'VotingService',
+  function($scope, MemeService, $http, $location, Notification, VotingService) {
 
   // Connect to the socket.
   io.socket.get('/meme/addconv');
@@ -43,6 +48,16 @@ angular.module('mainApp').controller('MainCtrl', [
 
   $scope.isoStrToDate = function(isoString) {
     return Date.parse(isoString);
+  };
+
+  $scope.upvote = function(memeId) {
+    console.log(memeId);
+    VotingService.vote(memeId, 1);
+  };
+
+  $scope.downvote = function(memeId) {
+    console.log(memeId);
+    VotingService.vote(memeId, -1);
   };
 
   $scope.saveMeme = function() {
