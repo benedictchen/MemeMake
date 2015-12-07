@@ -8,9 +8,11 @@
 module.exports = {
 
   attributes: {
-    user: { collection: 'User', via: 'votes', required: true },
-    meme: { collection: 'Meme', via: 'votes', required: true },
-    directionValue: { type: 'integer', required: true }
+    directionValue: { type: 'integer', required: true },
+    // meme: { collection: 'Meme' },
+    // user: { collection: 'User' },
+    memeId: {type: 'string'},
+    userId: {type: 'string'},
   }
 };
 

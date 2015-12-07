@@ -21,13 +21,48 @@ module.exports = {
       console.log('Meme', err, meme);
       if (!meme) {
         response.notFound('Meme with ' + params.memeId + ' not found.');
+        return;
       }
-      Vote.find({
-        user: request.session.user.id,
-        meme: meme.id,
-      }, function(err, records) {
-        console.log(err, records);
-        response.status(200).jsonx(records);
+      Vote.find().where({
+        memeId: meme.id,
+        userId: request.session.user.id,
+      }).exec(function(err, records) {
+        if (err) {
+          response.serverError(err);
+          return;
+        }
+        console.log('Finding all votes: ',err, records);
+        if (!records.length) {
+          console.log('CREATE TIME\n');
+          Vote.create({
+            memeId: meme.id,
+            userId: request.session.user.id,
+            directionValue: params.directionValue
+          }, function(err, createdVote) {
+            console.log('creating votes?', err, createdVote);
+            if (err) {
+              response.serverError(err);
+              return;
+            }
+            response.status(200).jsonx(createdVote);
+            return;
+          });
+        } else {
+          console.log('UPDATE TIME\n');
+          Vote.update(records[0].id, {
+            memeId: meme.id,
+            userId: request.session.user.id,
+            directionValue: params.directionValue,
+          }, function(err, updatedRecord) {
+            console.log('updated votes?', err, updatedRecord);
+            if (err) {
+              response.serverError(err);
+              return;
+            }
+            response.status(200).jsonx(updatedRecord[0]);
+            return;
+          });
+        }
       });
     });
 

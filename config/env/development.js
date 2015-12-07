@@ -26,6 +26,11 @@ module.exports = {
   },
 
   connections: {
+    // mongoDb: {
+    //   adapter: 'sails-mongo',
+    //   host: 'localhost',
+    //   port: 27017,
+    // },
     postgresLocal: {
       adapter: 'sails-postgresql',
       host: 'localhost',

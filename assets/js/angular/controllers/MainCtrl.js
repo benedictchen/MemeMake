@@ -52,12 +52,16 @@ angular.module('mainApp').controller('MainCtrl', [
 
   $scope.upvote = function(memeId) {
     console.log(memeId);
-    VotingService.vote(memeId, 1);
+    VotingService.vote(memeId, 1).then(function(response) {
+      console.log('response was', response);
+    });
   };
 
   $scope.downvote = function(memeId) {
     console.log(memeId);
-    VotingService.vote(memeId, -1);
+    VotingService.vote(memeId, -1).then(function(response) {
+      console.log('response was', response);
+    });
   };
 
   $scope.saveMeme = function() {

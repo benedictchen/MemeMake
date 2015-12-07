@@ -11,7 +11,6 @@ module.exports = {
   attributes: require('waterlock').models.user.attributes({
 
     memes: { collection: 'Meme', via: 'user' },
-    votes: { collection: 'Vote', via: 'user' },
 
   }),
 
