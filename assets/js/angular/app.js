@@ -71,10 +71,10 @@ app.run([
 
   var modalTimer = null;
 
-  $rootScope.$on('authorized', function(user) {
+  $rootScope.$on('authorized', function(evt, user) {
+    console.warn('ROOT SCOPE USER', user);
     if (user) {
       $rootScope.user = user;
-      console.log('ROOT SCOPE USER', user);
     }
   });
 

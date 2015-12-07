@@ -27,8 +27,11 @@ angular.module('mainApp').controller('MainCtrl', [
   $scope.selectedTemplate = null;
 
   $scope.hasVote = function(memeId, direction) {
+    var userId = $scope.votesByMemeId[memeId] &&
+                 $scope.votesByMemeId[memeId].userId;
     return $scope.votesByMemeId[memeId] &&
-           $scope.votesByMemeId[memeId].directionValue === direction;
+           $rootScope.user && $rootScope.user.id == userId &&
+           $scope.votesByMemeId[memeId].directionValue == direction;
   };
 
   /**
