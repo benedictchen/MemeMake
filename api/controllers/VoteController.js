@@ -6,6 +6,13 @@
  */
 
 module.exports = {
+
+  list: function(request, response) {
+    return Vote.find(function(err, records) {
+      response.status(200).jsonx(records);
+    });
+  },
+
 	vote: function(request, response) {
     var params = request.allParams();
     if (!request.session.user) {

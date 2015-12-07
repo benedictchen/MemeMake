@@ -60,25 +60,36 @@ app.run([
   '$templateCache',
   '$compile',
   '$uibModal',
-  function($rootScope, $templateRequest, $templateCache, $compile, $uibModal) {
+  '$q',
+  function(
+    $rootScope,
+    $templateRequest,
+    $templateCache,
+    $compile,
+    $uibModal,
+    $q) {
 
   var modalTimer = null;
 
   $rootScope.$on('unauthorized', function() {
 
     var showModal = function() {
-      if (modalTimer) {
-        clearTimeout(modalTimer);
-      }
-      modalTimer = setTimeout(function() {
-        $uibModal.open({
-          animation: true,
-          templateUrl: '/templates/login.html',
-          controller: 'AuthCtrl'
-        });
-      }, 500);
+      return $q(function(resolve, reject) {
+        if (modalTimer) {
+          clearTimeout(modalTimer);
+        }
+        modalTimer = setTimeout(function() {
+          $uibModal.open({
+            animation: true,
+            templateUrl: '/templates/login.html',
+            controller: 'AuthCtrl'
+          });
+        }, 500);
+      });
     };
-    showModal();
+    showModal().then(function() {
+      $rootScope.broadcast('authorized');
+    });
 
   });
 

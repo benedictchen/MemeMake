@@ -49,6 +49,7 @@ module.exports.routes = {
   '/meme/uploadRequest': 'MemeController.getSignedUploadUrl',
 
   // Voting
-  '/vote': 'VoteController.vote',
+  'POST /vote': 'VoteController.vote',
+  'GET /vote': 'VoteController.list',
 
 };

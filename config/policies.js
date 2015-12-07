@@ -63,6 +63,12 @@ module.exports.policies = {
     getSignedUploadUrl: ['sessionAuth'],
   },
 
+  VoteController: {
+    '*': false,
+    list: true,
+    vote: ['sessionAuth'],
+  },
+
   // RabbitController: {
 
 		// Apply the `false` policy as the default for all of RabbitController's actions

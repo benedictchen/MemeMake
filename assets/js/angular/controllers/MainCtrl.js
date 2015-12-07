@@ -1,11 +1,19 @@
 angular.module('mainApp').controller('MainCtrl', [
   '$scope',
+  '$rootScope',
   'MemeService',
   '$http',
   '$location',
   'Notification',
   'VotingService',
-  function($scope, MemeService, $http, $location, Notification, VotingService) {
+  function(
+    $scope,
+    $rootScope,
+    MemeService,
+    $http,
+    $location,
+    Notification,
+    VotingService) {
 
   // Connect to the socket.
   io.socket.get('/meme/addconv');
@@ -30,12 +38,23 @@ angular.module('mainApp').controller('MainCtrl', [
     MemeService.list().then(function(results) {
       $scope.memes = results;
     });
+    $scope.listVotes();
+  };
+
+  $scope.listVotes = function() {
+    VotingService.list().then(function(results) {
+      console.log('Votes:', results);
+      results.forEach(function(vote) {
+        $scope.votesByMemeId[vote.memeId] = vote;
+      });
+    });
   };
 
   $scope.listRecent = function() {
     MemeService.listRecent().then(function(results) {
       $scope.memes = results;
-    })
+    });
+    $scope.listVotes();
   };
 
   $scope.listTemplates = function() {
