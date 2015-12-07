@@ -1,1 +1,1 @@
-module.exports = require('sails-db-migrate').gruntTasks;
+// module.exports = require('sails-db-migrate').gruntTasks;
