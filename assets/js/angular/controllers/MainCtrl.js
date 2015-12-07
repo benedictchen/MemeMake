@@ -11,11 +11,17 @@ angular.module('mainApp').controller('MainCtrl', [
   io.socket.get('/meme/addconv');
 
   $scope.memes = [];
+  $scope.votesByMemeId = {};
   $scope.memeTemplates = [];
   $scope.isUploading = false;
   $scope.generatedMeme = null;
 
   $scope.selectedTemplate = null;
+
+  $scope.hasVote = function(memeId, direction) {
+    return $scope.votesByMemeId[memeId] &&
+           $scope.votesByMemeId[memeId].directionValue === direction;
+  };
 
   /**
    * Retrieves the latest list of memes.
@@ -54,6 +60,7 @@ angular.module('mainApp').controller('MainCtrl', [
     console.log(memeId);
     VotingService.vote(memeId, 1).then(function(response) {
       console.log('response was', response);
+      $scope.votesByMemeId[response.memeId] = response;
     });
   };
 
@@ -61,6 +68,7 @@ angular.module('mainApp').controller('MainCtrl', [
     console.log(memeId);
     VotingService.vote(memeId, -1).then(function(response) {
       console.log('response was', response);
+      $scope.votesByMemeId[response.memeId] = response;
     });
   };
 
@@ -108,6 +116,7 @@ angular.module('mainApp').controller('MainCtrl', [
           $scope.listTemplates();
         } else {
           // Error notification.
+          Notification.error(response);
         }
         $scope.isUploading = false;
 

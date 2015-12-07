@@ -14,10 +14,10 @@
             <span class="meme-timestamp" am-time-ago="{{isoStrToDate(meme.createdAt)}}"></span>
           </div>
           <div class="btn-group voting-buttons">
-            <a class="btn btn-default btn-xs" ng-click="upvote(meme.id)">
+            <a class="btn btn-default btn-xs" ng-click="upvote(meme.id)" ng-class="{ active: hasVote(meme.id, 1) }">
               <i class="glyphicon glyphicon-thumbs-up"></i>
             </a>
-            <a class="btn btn-default btn-xs" ng-click="downvote(meme.id)">
+            <a class="btn btn-default btn-xs" ng-click="downvote(meme.id)" ng-class="{ active: hasVote(meme.id, -1) }">
               <i class="glyphicon glyphicon-thumbs-down"></i>
             </a>
           </div>
