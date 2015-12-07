@@ -1,4 +1,4 @@
-angular.module('mainApp').factory('VotingService', [
+ angular.module('mainApp').factory('VotingService', [
   '$http', '$q',
   function($http, $q) {
     var VotingService = {
@@ -6,6 +6,9 @@ angular.module('mainApp').factory('VotingService', [
       list: function() {
         var deferred = $q.defer();
         $http.get('/vote').success(function(result) {
+          if (!result) {
+            return deferred.reject(result);
+          }
           if (result.status < 200 || result.status >= 400 ||
               typeof result === 'string') {
             return deferred.reject(result);

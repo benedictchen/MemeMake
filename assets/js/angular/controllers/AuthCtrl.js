@@ -1,6 +1,17 @@
 angular.module('mainApp').controller('AuthCtrl', [
-  '$scope', 'Notification', 'AuthService', '$uibModalInstance',
-  function($scope, Notification, AuthService, $uibModalInstance) {
+  '$scope',
+  '$rootScope',
+  'Notification',
+  'AuthService',
+  '$uibModalInstance',
+  function(
+    $scope,
+    $rootScope,
+    Notification,
+    AuthService,
+    $uibModalInstance) {
+
+    var DEFAULT_LOGIN_ERROR = 'Error signing in.';
 
     $scope.formData = {};
 
@@ -24,16 +35,19 @@ angular.module('mainApp').controller('AuthCtrl', [
       })
       .then(function(result) {
         console.log(result);
-        if (result.id || (result.status >= 200 && result.status < 400)) {
+        if (result && result.id || result &&
+           (result.status >= 200 && result.status < 400)) {
           Notification.success({
             title: 'Success',
             message: 'Successfully registered.  Please log in.'
           });
+          $rootScope.$broadcast('authorized', result);
           $uibModalInstance.close();
         } else {
           Notification.error({
             title: 'Error',
-            message: (result.statusText || result.error)
+            message: (result && result.statusText || result && result.error) ||
+                     result || DEFAULT_LOGIN_ERROR
           });
         }
       }).catch(function(err) {
@@ -57,16 +71,20 @@ angular.module('mainApp').controller('AuthCtrl', [
       AuthService.login($scope.formData.email, $scope.formData.password)
         .then(function(result) {
           console.log(result);
-          if (result.id || (result.status >= 200 && result.status < 400)) {
+          if (result && result.id || result &&
+             (result.status >= 200 && result.status < 400)) {
             Notification.success({
               title: 'Success',
               message: 'Successfully logged in.'
             });
+            $rootScope.$broadcast('authorized', result);
             $uibModalInstance.close();
           } else {
             Notification.error({
               title: 'Error',
-              message: (result.statusText || result.error)
+              message: (result && result.statusText ||
+                        result && result.error) ||
+                        result || DEFAULT_LOGIN_ERROR
             });
           }
         }).catch(function(err) {

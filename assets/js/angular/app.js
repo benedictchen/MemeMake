@@ -71,6 +71,13 @@ app.run([
 
   var modalTimer = null;
 
+  $rootScope.$on('authorized', function(user) {
+    if (user) {
+      $rootScope.user = user;
+      console.log('ROOT SCOPE USER', user);
+    }
+  });
+
   $rootScope.$on('unauthorized', function() {
 
     var showModal = function() {
@@ -87,9 +94,7 @@ app.run([
         }, 500);
       });
     };
-    showModal().then(function() {
-      $rootScope.broadcast('authorized');
-    });
+    showModal();
 
   });
 
