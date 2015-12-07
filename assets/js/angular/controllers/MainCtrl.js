@@ -87,6 +87,7 @@ angular.module('mainApp').controller('MainCtrl', [
       console.log('User?', $rootScope.user);
       console.log('votesByMemeId', $scope.votesByMemeId);
       $scope.votesByMemeId[response.memeId] = response;
+      $scope.list();
     });
   };
 
@@ -97,6 +98,7 @@ angular.module('mainApp').controller('MainCtrl', [
       console.log('User?', $rootScope.user);
       console.log('votesByMemeId', $scope.votesByMemeId);
       $scope.votesByMemeId[response.memeId] = response;
+      $scope.list();
     });
   };
 
@@ -155,7 +157,7 @@ angular.module('mainApp').controller('MainCtrl', [
     });
   };
 
-  $scope.listRecent();
+  $scope.list();
   $scope.listTemplates();
 
 }]);
