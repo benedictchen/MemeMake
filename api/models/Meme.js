@@ -17,7 +17,7 @@ module.exports = {
 
     imageUrl: { type: 'string', required: true},
 
-    voteCount: { type: 'integer' },
+    voteCount: { type: 'integer', defaultsTo: 0 },
 
   }
 };
