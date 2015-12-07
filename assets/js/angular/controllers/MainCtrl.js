@@ -6,6 +6,7 @@ angular.module('mainApp').controller('MainCtrl', [
   '$location',
   'Notification',
   'VotingService',
+  'store',
   function(
     $scope,
     $rootScope,
@@ -13,7 +14,8 @@ angular.module('mainApp').controller('MainCtrl', [
     $http,
     $location,
     Notification,
-    VotingService) {
+    VotingService,
+    store) {
 
   // Connect to the socket.
   io.socket.get('/meme/addconv');
