@@ -56,6 +56,9 @@ module.exports = {
           });
         } else {
           console.log('UPDATE TIME\n');
+          if (records[0].directionValue === params.directionValue) {
+            return response.status(200).jsonx(records[0]);
+          }
           Vote.update(records[0].id, {
             memeId: meme.id,
             userId: request.session.user.id,
