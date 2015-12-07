@@ -4,25 +4,7 @@
   </div>
   <ul class="meme-list clearfix">
     <li class="meme clearfix" ng-repeat="meme in memes" >
-      <div class="meme-content">
-        <a href="/#/meme/{{meme.id}}">
-          <img
-          ng-src="{{meme.imageUrl}}"
-          uib-tooltip="{{meme.description}}" />
-          <div>
-            <a class="author truncate">{{meme.author}}</a>
-            <span class="meme-timestamp" am-time-ago="{{isoStrToDate(meme.createdAt)}}"></span>
-          </div>
-          <div class="btn-group voting-buttons">
-            <a class="btn btn-default btn-xs" ng-click="upvote(meme.id)" ng-class="{ active: hasVote(meme.id, 1) }">
-              <i class="glyphicon glyphicon-thumbs-up"></i>
-            </a>
-            <a class="btn btn-default btn-xs" ng-click="downvote(meme.id)" ng-class="{ active: hasVote(meme.id, -1) }">
-              <i class="glyphicon glyphicon-thumbs-down"></i>
-            </a>
-          </div>
-        </a>
-      </div>
+      <ng-include src="'/templates/_meme.html'"></ng-include>
     </li>
   </ul>
 </div>

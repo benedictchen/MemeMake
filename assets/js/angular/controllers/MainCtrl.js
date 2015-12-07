@@ -82,6 +82,8 @@ angular.module('mainApp').controller('MainCtrl', [
     console.log(memeId);
     VotingService.vote(memeId, 1).then(function(response) {
       console.log('response was', response);
+      console.log('User?', $rootScope.user);
+      console.log('votesByMemeId', $scope.votesByMemeId);
       $scope.votesByMemeId[response.memeId] = response;
     });
   };
@@ -90,6 +92,8 @@ angular.module('mainApp').controller('MainCtrl', [
     console.log(memeId);
     VotingService.vote(memeId, -1).then(function(response) {
       console.log('response was', response);
+      console.log('User?', $rootScope.user);
+      console.log('votesByMemeId', $scope.votesByMemeId);
       $scope.votesByMemeId[response.memeId] = response;
     });
   };

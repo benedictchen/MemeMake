@@ -11,5 +11,18 @@
   </div>
   <hr/>
 
-  TODO: Make me!
+
+  <div>
+    <div class="page-header">
+      <h1>Recent</h1>
+    </div>
+    <ul class="meme-list clearfix">
+      <li class="meme clearfix" ng-repeat="meme in memes" >
+        <ng-include src="'/templates/_meme.html'"></ng-include>
+      </li>
+    </ul>
+  </div>
+
+
+
 </div>

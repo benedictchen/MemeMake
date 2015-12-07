@@ -1,5 +1,10 @@
 var app = angular.module('mainApp', [
-  'ngRoute', 'file-model', 'ui.bootstrap', 'angularMoment', 'ui-notification'
+  'ngRoute',
+  'file-model',
+  'ui.bootstrap',
+  'angularMoment',
+  'ui-notification',
+  'angular-storage',
 ]);
 
 
@@ -61,20 +66,25 @@ app.run([
   '$compile',
   '$uibModal',
   '$q',
+  'store',
   function(
     $rootScope,
     $templateRequest,
     $templateCache,
     $compile,
     $uibModal,
-    $q) {
+    $q,
+    store) {
 
   var modalTimer = null;
+
+  $rootScope.user = store.get('user');
 
   $rootScope.$on('authorized', function(evt, user) {
     console.warn('ROOT SCOPE USER', user);
     if (user) {
       $rootScope.user = user;
+      store.set('user', user);
     }
   });
 
