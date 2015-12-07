@@ -52,4 +52,6 @@ module.exports.routes = {
   'POST /vote': 'VoteController.vote',
   'GET /vote': 'VoteController.list',
 
+  'GET /user/memes': 'UserController.memes',
+
 };

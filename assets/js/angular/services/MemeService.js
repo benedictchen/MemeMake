@@ -3,12 +3,24 @@ angular.module('mainApp').factory('MemeService', [
   function($http, $q) {
     var MemeService = {
 
+      memes: [],
+
       getMemeById: function(memeId) {
         if (!memeId) {
           throw new TypeError('Must provide meme ID');
         }
         var deferred = $q.defer();
         $http.get('/meme/' + memeId).success(function(result) {
+          deferred.resolve(result);
+        }).error(function(err) {
+          deferred.reject(err);
+        });
+        return deferred.promise;
+      },
+
+      getMemesForUser: function() {
+        var deferred = $q.defer();
+        $http.get('/user/memes').success(function(result) {
           deferred.resolve(result);
         }).error(function(err) {
           deferred.reject(err);

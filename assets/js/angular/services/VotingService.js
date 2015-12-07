@@ -3,6 +3,8 @@
   function($http, $q) {
     var VotingService = {
 
+      votesByMemeId: {},
+
       list: function() {
         var deferred = $q.defer();
         $http.get('/vote').success(function(result) {

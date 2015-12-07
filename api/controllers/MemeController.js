@@ -24,7 +24,7 @@ module.exports = {
     }
     console.log('attempting to create meme by', request.session.user.auth);
     Meme.create({
-      user: request.session.user,
+      user: request.session.user.id,
       author: request.session.user.auth.username,
       description: params.description,
       imageUrl: params.imageUrl

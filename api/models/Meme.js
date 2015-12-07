@@ -9,7 +9,7 @@ module.exports = {
 
   attributes: {
 
-    user: { collection: 'User', via: 'memes' },
+    user: { model: 'User' },
 
     author: { type: 'string'},
 

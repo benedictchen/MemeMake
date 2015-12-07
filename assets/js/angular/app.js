@@ -26,7 +26,7 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'MainCtrl'
   }).when('/profile', {
     templateUrl: '/templates/profile.html',
-    controller: 'MainCtrl'
+    controller: 'ProfileCtrl'
   }).when('/meme/:memeId', {
     templateUrl: '/templates/show.html',
     controller: 'MemeDetailCtrl'
